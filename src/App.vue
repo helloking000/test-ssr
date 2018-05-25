@@ -12,7 +12,7 @@
     </div>
     <div>{{message}}</div>
     <div class="test-area">
-      <button v-on:click="count++">add</button>
+      <button v-on:click="handleClick()">add</button>
       <div>{{count}}</div>
     </div>
   </div>
@@ -23,6 +23,12 @@ export default {
     return {
       message: '大灰狼，你好！',
       count: 0,
+    }
+  },
+  methods: {
+    handleClick() {
+      this.count++;
+      console.log('clicked!!')
     }
   }
 }
