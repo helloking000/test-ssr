@@ -1,8 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-const barView = () => require('./components/Bar.vue')
-const bazView = () => require('./components/Bar.vue')
-const fooView = () => require('./components/Bar.vue')
+// const barView = () => require('./components/Bar.vue')
+// const bazView = () => require('./components/Baz.vue')
+const barView = require('./components/Bar.vue')
+const bazView = require('./components/Baz.vue')
+const fooView = require('./components/Foo.vue')
 
 Vue.use(Router)
 

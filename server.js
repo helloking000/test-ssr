@@ -1,8 +1,8 @@
 const server = require('express')()
-const createApp = require('/dist/server-bundle.js')
+const createApp = require('./dist/server-bundle.js')
 const path = require('path')
 
-const renderer = require('vue-server-renderer').createBundleRenderer('/dist/vue-ssr-server-bundle.json', {
+const renderer = require('vue-server-renderer').createRenderer({
     template: require('fs').readFileSync(path.resolve(__dirname, './index.template.html'), 'utf-8')
 })
 
@@ -12,19 +12,24 @@ const context = {
 }
 
 server.get('*', (req, res) => {
-    const context = {url: req.url}
+    const reqInfo = {url: req.url}
 
-    createApp(context).then(app => {
+    createApp.default(reqInfo).then(app => {
         renderer.renderToString(app, context, (err, html) => {
-            if (err) {
-                if (err.code === 404) {
-                    res.status(404).end('Page not found')
-                } else {
-                    res.status(500).end('Internal Server Error')
-                }
-            } else {
-                res.end(html)
-            }
+            res.end(html)
         })
-    })
+    }).catch(err => {
+        if (err) {
+            if (err.code === 404) {
+                res.status(404).end('老王，Page not found')
+            } else {
+                res.status(500).end('Internal Server Error')
+            }
+        }
+    });
+})
+
+const port = process.env.PORT || 4000
+server.listen(port, () => {
+    console.log(`server started at localhost:${port}`)
 })
