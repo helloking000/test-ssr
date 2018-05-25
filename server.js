@@ -16,6 +16,9 @@ server.get('*', (req, res) => {
 
     createApp.default(reqInfo).then(app => {
         renderer.renderToString(app, context, (err, html) => {
+            if (err) {
+                console.log(err)
+            }
             res.end(html)
         })
     }).catch(err => {
