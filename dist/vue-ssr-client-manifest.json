@@ -1,14 +1,14 @@
 {
   "publicPath": "/distPublic/",
   "all": [
-    "main.d2bdf0e79f53c0dfe758.js",
+    "main.550305c34446974d7cca.js",
     "manifest.05586de83ef53b43f168.js",
-    "main.d2bdf0e79f53c0dfe758.js.map",
+    "main.550305c34446974d7cca.js.map",
     "manifest.05586de83ef53b43f168.js.map"
   ],
   "initial": [
     "manifest.05586de83ef53b43f168.js",
-    "main.d2bdf0e79f53c0dfe758.js"
+    "main.550305c34446974d7cca.js"
   ],
   "async": [],
   "modules": {

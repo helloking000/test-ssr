@@ -11,6 +11,9 @@ const clientManifest = require('./dist/vue-ssr-client-manifest.json')
 //     clientManifest,
 // })
 
+const resolve = file => path.resolve(__dirname, file)
+const serve = path => require('express').static(resolve(path))
+server.use('/distPublic', serve('./dist', true))
 const renderer = require('vue-server-renderer').createBundleRenderer(serverBundle, {
     template: require('fs').readFileSync(path.resolve(__dirname, './index.template.html'), 'utf-8'),
     clientManifest,
