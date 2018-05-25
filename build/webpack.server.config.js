@@ -4,6 +4,7 @@ const baseConfig = require('./webpack.base.config.js')
 const VueSSRServerPlugin = require('vue-server-renderer/server-plugin')
 
 module.exports = merge(baseConfig, {
+    mode: 'none',
     // 将 entry 指向应用程序的 server entry 文件
     entry: require('path').resolve(__dirname, '../src/entry-server.js'),
 
@@ -17,6 +18,7 @@ module.exports = merge(baseConfig, {
 
     // 此处告知 server bundle 使用 Node 风格导出模块(Node-style exports)
     output: {
+        filename: 'server-bundle.js',
         libraryTarget: 'commonjs2'
     },
 

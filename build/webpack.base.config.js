@@ -30,23 +30,14 @@ module.exports = {
             },
             {
                 test: /\.styl(us)?$/,
-                use: ExtractTextPlugin.extract({
-                    use: [
-                        {
-                            loader: 'css-loader',
-                            options: { minimize: true }
-                        },
-                        'stylus-loader'
-                    ],
-                    fallback: 'vue-style-loader'
-                }),
+                use: ['vue-style-loader', 'css-loader', 'stylus-loader'],
             },
         ]
     },
     plugins: [
-        new VueLoaderPlugin(),
-        new ExtractTextPlugin({
-            filename: 'common.[chunkhash].css'
-        })
+        new VueLoaderPlugin(),  // 不用回报错
+        // new ExtractTextPlugin({
+        //     filename: 'common.[chunkhash].css'
+        // })
     ],
 }
