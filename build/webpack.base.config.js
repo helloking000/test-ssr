@@ -3,8 +3,10 @@ const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 module.exports = {
+    mode: 'none',
     devtool: '#cheap-module-source-map',
     output: {
         path: path.resolve(__dirname, '../dist'),
@@ -38,6 +40,7 @@ module.exports = {
         new VueLoaderPlugin(),  // 不用回报错
         // new ExtractTextPlugin({
         //     filename: 'common.[chunkhash].css'
-        // })
+        // }),
+        new CleanWebpackPlugin(['dist']),
     ],
 }

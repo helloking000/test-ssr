@@ -4,11 +4,11 @@ import Router from 'vue-router'
 // const bazView = () => require('./components/Baz.vue')
 // const barView = require('./components/Bar.vue')
 // const bazView = require('./components/Baz.vue')
-const fooView = require('./components/Foo.vue') // 不知道，为什么这样不行！
+// const fooView = require('./components/Foo.vue') // 不知道，为什么这样不行！
 
 const barView = { template: '<div>bar</div>' }
 const bazView = { template: '<div>baz</div>' }
-// const fooView = { template: '<div>foo</div>' }
+const fooView = { template: '<div>foo</div>' }
 
 Vue.use(Router)
 

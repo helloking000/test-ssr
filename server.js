@@ -1,35 +1,36 @@
 const server = require('express')()
-const createApp = require('./dist/server-bundle.js')
+// const createApp = require('./dist/server-bundle.js')
 const path = require('path')
 
-const renderer = require('vue-server-renderer').createRenderer({
-    template: require('fs').readFileSync(path.resolve(__dirname, './index.template.html'), 'utf-8')
+const serverBundle = require('./dist/vue-ssr-server-bundle.json')
+const clientManifest = require('./dist/vue-ssr-client-manifest.json')
+
+
+// const renderer = require('vue-server-renderer').createRenderer(serverBundle, {
+//     template: require('fs').readFileSync(path.resolve(__dirname, './index.template.html'), 'utf-8'),
+//     clientManifest,
+// })
+
+const renderer = require('vue-server-renderer').createBundleRenderer(serverBundle, {
+    template: require('fs').readFileSync(path.resolve(__dirname, './index.template.html'), 'utf-8'),
+    clientManifest,
 })
 
-const context = {
-    title: 'Hello king页面模板',
-    meta: `<meta charset="utf-8">`,
-}
-
 server.get('*', (req, res) => {
-    const reqInfo = {url: req.url}
+    res.setHeader("Content-Type", "text/html")
 
-    createApp.default(reqInfo).then(app => {
-        renderer.renderToString(app, context, (err, html) => {
-            if (err) {
-                console.log(err)
-            }
-            res.end(html)
-        })
-    }).catch(err => {
+    const context = {
+        title: 'Hello king页面模板', // default title
+        url: req.url,
+        meta: `<meta charset="utf-8">`,  // 这也不能省略。。。。这玩意写得真实费劲啊
+    }
+
+    renderer.renderToString(context, (err, html) => {
         if (err) {
-            if (err.code === 404) {
-                res.status(404).end('老王，Page not found')
-            } else {
-                res.status(500).end('Internal Server Error')
-            }
+            console.log(err)
         }
-    });
+        res.end(html)
+    })
 })
 
 const port = process.env.PORT || 4000
