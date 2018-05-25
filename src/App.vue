@@ -11,6 +11,10 @@
       <router-view></router-view>
     </div>
     <div>{{message}}</div>
+    <div class="test-area">
+      <button v-on:click="count++">add</button>
+      <div>{{count}}</div>
+    </div>
   </div>
 </template>
 <script>
@@ -18,6 +22,7 @@ export default {
   data() {
     return {
       message: '大灰狼，你好！',
+      count: 0,
     }
   }
 }
