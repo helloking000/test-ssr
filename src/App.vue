@@ -10,13 +10,13 @@
     <div>
       <router-view></router-view>
     </div>
+    
     <div>{{message}}</div>
+
     <div class="test-area">
       <button v-on:click="handleClick()">add</button>
       <div>{{count}}</div>
     </div>
-    <div v-on:click="say('hi')">Say hi-1</div>
-    <div @click="say('hi-2')">Say hi-2</div>
   </div>
 </template>
 <script>
@@ -32,9 +32,6 @@ export default {
       this.count++;
       console.log('clicked!!')
     },
-    say: function (message) {
-      alert(message)
-    }
   }
 }
 </script>
