@@ -1,16 +1,13 @@
 const path = require('path')
 const webpack = require('webpack')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 module.exports = {
     mode: 'none',
     devtool: '#cheap-module-source-map',
     output: {
         path: path.resolve(__dirname, '../dist'),
-        publicPath: '/distPublic/',
+        publicPath: '/distPublic/',   // express.static 伺服静态资源的路径
         filename: '[name].[chunkhash].js'
     },
     module: {
@@ -30,17 +27,9 @@ module.exports = {
                 loader: 'babel-loader',
                 exclude: /node_modules/
             },
-            {
-                test: /\.styl(us)?$/,
-                use: ['vue-style-loader', 'css-loader', 'stylus-loader'],
-            },
         ]
     },
     plugins: [
         new VueLoaderPlugin(),  // 不用回报错
-        // new ExtractTextPlugin({
-        //     filename: 'common.[chunkhash].css'
-        // }),
-        new CleanWebpackPlugin(['dist']),
     ],
 }
